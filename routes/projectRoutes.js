@@ -37,15 +37,14 @@ router.get(
 router.put(
     '/:id',
     expressAsyncHandler(async (req, res) => {
-        const data = req.body
         const project = await Project.findById(req.params.id)
 
         if (project) {
-            project.image = data.image
-            project.made = data.made
-            project.name = data.name
-            project.comment = data.comment
-            project.link = data.link
+            project.image = req.body.image
+            project.made = req.body.made
+            project.name = req.body.name
+            project.comment = req.body.comment
+            project.link
 
             const updatedProject = await project.save()
             res.json(updatedProject)
@@ -62,12 +61,11 @@ router.put(
 router.put(
     '/like/:id',
     expressAsyncHandler(async (req, res) => {
-        const { like } = req.body
-
-        const project = await Project.findById(req.params.id)
+        let { id, like } = req.body
+        const project = await Project.findById(id)
 
         if (project) {
-            project.like = like
+            project.like = ++like
             const updatedLike = project.save()
             res.json(updatedLike)
         } else {
@@ -83,9 +81,12 @@ router.put(
 router.post(
     '/',
     expressAsyncHandler(async (req, res) => {
-        const data = req.body
         const project = new Project({
-            ...data,
+            // image: `/images/${req.body.image}`,
+            made: req.body.made,
+            name: req.body.name,
+            comment: req.body.comment,
+            link: req.body.link,
             like: 0,
         })
 

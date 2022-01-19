@@ -5,6 +5,7 @@ const projectSchema = mongoose.Schema(
         image: {
             type: String,
             required: true,
+            default: '/images/comingsoon1.png',
         },
         made: {
             type: String,

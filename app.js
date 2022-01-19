@@ -5,22 +5,24 @@ import connectDB from './config/db.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import projectRoutes from './routes/projectRoutes.js'
 import otherRoutes from './routes/otherRoutes.js'
+import checkRouter from './routes/checkRoutes.js'
 import cors from 'cors'
 
 const app = express()
 dotenv.config()
 connectDB()
 
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(cors())
 
 app.get('/', (req, res) => {
     res.send('Hello World')
 })
 
 app.use('/projects', projectRoutes)
-app.use('/other', otherRoutes)
+app.use('/others', otherRoutes)
+app.use('/check', checkRouter)
 
 app.use(notFound)
 app.use(errorHandler)

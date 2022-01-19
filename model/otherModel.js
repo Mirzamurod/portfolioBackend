@@ -14,14 +14,6 @@ const otherSchema = mongoose.Schema(
             type: String,
             required: true,
         },
-        username: {
-            type: String,
-            required: true,
-        },
-        password: {
-            type: String,
-            required: true,
-        },
         facebook: {
             type: String,
             required: true,
@@ -31,6 +23,10 @@ const otherSchema = mongoose.Schema(
             required: true,
         },
         telegram: {
+            type: String,
+            required: true,
+        },
+        linkedin: {
             type: String,
             required: true,
         },

@@ -5,6 +5,8 @@ import other from './data/other.js'
 import Project from './model/projectModel.js'
 import Other from './model/otherModel.js'
 import connectDB from './config/db.js'
+import Check from './model/checkModel.js'
+import { check } from './data/check.js'
 
 dotenv.config()
 connectDB()
@@ -13,9 +15,11 @@ const importData = async () => {
     try {
         await Project.deleteMany()
         await Other.deleteMany()
+        await Check.deleteMany()
 
         await Project.insertMany(projects)
         await Other.insertMany(other)
+        await Check.insertMany(check)
 
         console.log('Data Imported!'.green.inverse)
         process.exit()
@@ -29,6 +33,7 @@ const destroyData = async () => {
     try {
         await Project.deleteMany()
         await Other.deleteMany()
+        await Check.deleteMany()
 
         console.log('Data destroyed!'.red.inverse)
         process.exit()
