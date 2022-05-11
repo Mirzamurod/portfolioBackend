@@ -5,7 +5,8 @@ import connectDB from './config/db.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import projectRoutes from './routes/projectRoutes.js'
 import otherRoutes from './routes/otherRoutes.js'
-import checkRouter from './routes/checkRoutes.js'
+import checkRoutes from './routes/checkRoutes.js'
+import contactRoutes from './routes/contectRoutes.js'
 import cors from 'cors'
 
 const app = express()
@@ -22,7 +23,8 @@ app.get('/', (req, res) => {
 
 app.use('/projects', projectRoutes)
 app.use('/others', otherRoutes)
-app.use('/check', checkRouter)
+app.use('/check', checkRoutes)
+app.use('/contact', contactRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
